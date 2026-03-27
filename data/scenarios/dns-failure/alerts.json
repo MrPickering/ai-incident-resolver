@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ALT-001",
+    "severity": "critical",
+    "source": "prometheus",
+    "metric": "dns_query_failure_rate",
+    "host": "prod-dns-01",
+    "value": "0.85",
+    "threshold": "0.05",
+    "timestamp": "2024-03-05T10:15:00Z",
+    "message": "DNS query failure rate at 85% on prod-dns-01"
+  },
+  {
+    "id": "ALT-002",
+    "severity": "critical",
+    "source": "prometheus",
+    "metric": "dns_query_failure_rate",
+    "host": "prod-dns-02",
+    "value": "0.82",
+    "threshold": "0.05",
+    "timestamp": "2024-03-05T10:15:30Z",
+    "message": "DNS query failure rate at 82% on prod-dns-02"
+  },
+  {
+    "id": "ALT-003",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "http.connect_time.p99",
+    "host": "prod-app-*",
+    "value": "30000",
+    "threshold": "500",
+    "timestamp": "2024-03-05T10:16:00Z",
+    "message": "Connection timeout across all application servers"
+  },
+  {
+    "id": "ALT-004",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "external_api.error_rate",
+    "service": "user-service",
+    "value": "0.95",
+    "threshold": "0.05",
+    "timestamp": "2024-03-05T10:17:00Z",
+    "message": "External API calls failing at 95% - cannot resolve hostnames"
+  },
+  {
+    "id": "ALT-005",
+    "severity": "critical",
+    "source": "pagerduty",
+    "type": "service_degradation",
+    "service": "all-services",
+    "timestamp": "2024-03-05T10:18:00Z",
+    "message": "Multiple services degraded - widespread connectivity failures"
+  }
+]

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "ai-incident-resolver"
+version = "1.0.0"
+description = "AI-powered incident response that replaces 2+ hours of DevOps work in under 30 seconds"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    {name = "PickBits.ai"}
+]
+dependencies = [
+    "anthropic>=0.40.0",
+    "click>=8.0",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+ai-incident-resolver = "src.main:cli"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

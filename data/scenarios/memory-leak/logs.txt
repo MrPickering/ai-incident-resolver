@@ -1,0 +1,56 @@
+Feb 10 08:00:12 prod-app-01 deploy-agent[3201]: INFO Deployment started: payment-service v3.8.0
+Feb 10 08:00:14 prod-app-01 deploy-agent[3201]: INFO New feature flag enabled: CACHE_USER_SESSIONS=true
+Feb 10 08:00:15 prod-app-01 deploy-agent[3201]: INFO Cache backend: in-memory (HashMap)
+Feb 10 08:00:18 prod-app-01 deploy-agent[3201]: INFO Deployment completed successfully
+Feb 10 08:00:20 prod-app-01 payment-service[4101]: INFO Service payment-service v3.8.0 started on port 8443
+Feb 10 08:00:20 prod-app-01 payment-service[4101]: INFO JVM heap: initial=512MB, max=4096MB
+Feb 10 08:00:21 prod-app-01 payment-service[4101]: INFO Session cache initialized (eviction: NONE, max_size: UNLIMITED)
+Feb 10 08:15:00 prod-app-01 node_exporter[1102]: INFO process memory payment-service: 820MB
+Feb 10 09:00:00 prod-app-01 node_exporter[1102]: INFO process memory payment-service: 1.1GB
+Feb 10 09:00:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 12,450
+Feb 10 10:00:00 prod-app-01 node_exporter[1102]: INFO process memory payment-service: 1.5GB
+Feb 10 10:00:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 28,320
+Feb 10 10:00:02 prod-app-01 payment-service[4101]: DEBUG GC pause: 180ms (Young Gen)
+Feb 10 11:00:00 prod-app-01 node_exporter[1102]: WARNING process memory payment-service: 2.0GB
+Feb 10 11:00:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 45,100
+Feb 10 11:00:02 prod-app-01 payment-service[4101]: DEBUG GC pause: 450ms (Young Gen)
+Feb 10 12:00:00 prod-app-01 node_exporter[1102]: WARNING process memory payment-service: 2.5GB
+Feb 10 12:00:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 63,800
+Feb 10 12:00:03 prod-app-01 payment-service[4101]: WARNING GC pause: 1200ms (Full GC)
+Feb 10 12:00:05 prod-app-01 payment-service[4101]: WARNING Request processing delayed by GC: POST /api/payments
+Feb 10 13:00:00 prod-app-01 node_exporter[1102]: WARNING process memory payment-service: 2.9GB
+Feb 10 13:00:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 82,500
+Feb 10 13:00:04 prod-app-01 payment-service[4101]: WARNING GC pause: 2100ms (Full GC)
+Feb 10 13:30:00 prod-app-01 payment-service[4101]: WARNING GC pause: 3500ms (Full GC)
+Feb 10 13:30:04 prod-app-01 payment-service[4101]: WARNING 12 requests timed out during GC pause
+Feb 10 14:00:00 prod-app-01 node_exporter[1102]: CRITICAL process memory payment-service: 3.2GB
+Feb 10 14:00:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 98,200
+Feb 10 14:00:02 prod-app-01 payment-service[4101]: WARNING Heap usage: 92% (3.2GB / 4GB)
+Feb 10 14:15:00 prod-app-01 payment-service[4101]: ERROR GC pause: 5200ms (Full GC) - freed only 45MB
+Feb 10 14:15:06 prod-app-01 payment-service[4101]: ERROR 28 requests timed out during GC pause
+Feb 10 14:20:00 prod-app-01 payment-service[4101]: WARNING Heap usage: 95% (3.4GB / 4GB)
+Feb 10 14:20:01 prod-app-01 payment-service[4101]: INFO Active cached sessions: 104,800
+Feb 10 14:25:00 prod-app-01 payment-service[4101]: ERROR java.lang.OutOfMemoryError: GC overhead limit exceeded
+Feb 10 14:25:00 prod-app-01 payment-service[4101]: ERROR   at com.app.cache.SessionCache.put(SessionCache.java:89)
+Feb 10 14:25:00 prod-app-01 payment-service[4101]: ERROR   at com.app.auth.AuthFilter.cacheSession(AuthFilter.java:142)
+Feb 10 14:25:01 prod-app-01 payment-service[4101]: ERROR Request POST /api/payments failed: 500 Internal Server Error
+Feb 10 14:30:00 prod-app-01 prometheus[1501]: ALERT FIRING: process_resident_memory_bytes > 3GB on prod-app-01 (current: 3.4GB)
+Feb 10 14:30:05 prod-app-01 payment-service[4101]: ERROR GC pause: 7800ms (Full GC) - freed only 12MB
+Feb 10 14:30:13 prod-app-01 payment-service[4101]: ERROR 45 requests timed out during GC pause
+Feb 10 14:35:00 prod-app-01 prometheus[1501]: ALERT FIRING: node_memory_MemAvailable_bytes < 1GB on prod-app-01 (current: 500MB)
+Feb 10 14:35:01 prod-app-01 kernel: [89201.445] python3[6501]: segfault at 7f3c2 ip 00007f3c2 sp 00007fff error 4 in libc-2.31.so
+Feb 10 14:38:00 prod-app-01 payment-service[4101]: ERROR java.lang.OutOfMemoryError: Java heap space
+Feb 10 14:38:00 prod-app-01 payment-service[4101]: ERROR   at java.util.HashMap.resize(HashMap.java:704)
+Feb 10 14:38:00 prod-app-01 payment-service[4101]: ERROR   at com.app.cache.SessionCache.put(SessionCache.java:89)
+Feb 10 14:40:00 prod-app-01 datadog-agent[1801]: ALERT: jvm.gc.pause_time = 8500ms (threshold: 2000ms) on prod-app-01
+Feb 10 14:40:05 prod-app-01 payment-service[4101]: CRITICAL Service unresponsive - GC consuming 98% of CPU time
+Feb 10 14:42:00 prod-app-01 datadog-agent[1801]: ALERT: http.response_time.p99 = 15000ms (threshold: 2000ms) on prod-app-01
+Feb 10 14:42:01 prod-app-01 nginx[2201]: ERROR upstream timed out (110: Connection timed out) while connecting to upstream
+Feb 10 14:42:30 prod-app-01 payment-service[4101]: ERROR Health check failed: /health returned 503 (response time: 12000ms)
+Feb 10 14:43:00 prod-app-01 payment-service[4101]: CRITICAL 92% of requests failing in last 5 minutes
+Feb 10 14:45:00 prod-app-01 pagerduty-agent[1901]: INCIDENT CREATED: Payment service health check failures - 60% error rate
+Feb 10 14:45:30 prod-app-01 kernel: [90131.882] Out of memory: Killed process 4101 (java) total-vm:8124568kB
+Feb 10 14:45:31 prod-app-01 systemd[1]: ERROR payment-service.service: Main process exited, code=killed, status=9/KILL
+Feb 10 14:45:32 prod-app-01 systemd[1]: INFO payment-service.service: Scheduled restart job
+Feb 10 14:45:35 prod-app-01 payment-service[9201]: INFO Service payment-service v3.8.0 started on port 8443
+Feb 10 14:45:36 prod-app-01 payment-service[9201]: INFO Session cache initialized (eviction: NONE, max_size: UNLIMITED)

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "ALT-001",
+    "severity": "critical",
+    "source": "prometheus",
+    "metric": "ssl_certificate_expiry_seconds",
+    "host": "prod-lb-01",
+    "value": "0",
+    "threshold": "604800",
+    "timestamp": "2024-04-20T00:00:30Z",
+    "message": "TLS certificate expired for *.example.com on prod-lb-01"
+  },
+  {
+    "id": "ALT-002",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "ssl_handshake_error_rate",
+    "host": "prod-lb-01",
+    "value": "0.98",
+    "threshold": "0.01",
+    "timestamp": "2024-04-20T00:01:00Z",
+    "message": "98% of TLS handshakes failing on prod-lb-01"
+  },
+  {
+    "id": "ALT-003",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "http.5xx_rate",
+    "host": "prod-lb-01",
+    "value": "0.95",
+    "threshold": "0.05",
+    "timestamp": "2024-04-20T00:02:00Z",
+    "message": "95% of HTTPS requests returning errors"
+  },
+  {
+    "id": "ALT-004",
+    "severity": "critical",
+    "source": "statuspage",
+    "type": "customer_reports",
+    "service": "web-portal",
+    "timestamp": "2024-04-20T00:03:00Z",
+    "message": "Multiple customer reports: 'Your connection is not private' errors"
+  },
+  {
+    "id": "ALT-005",
+    "severity": "critical",
+    "source": "pagerduty",
+    "type": "service_outage",
+    "service": "web-portal",
+    "timestamp": "2024-04-20T00:05:00Z",
+    "message": "Complete web portal outage - all HTTPS traffic failing"
+  }
+]

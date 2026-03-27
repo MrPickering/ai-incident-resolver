@@ -1,0 +1,13 @@
+{
+  "clusters": [
+    {
+      "id": "INC-001",
+      "root_alert": "ALT-001",
+      "related_alerts": ["ALT-002", "ALT-003", "ALT-004", "ALT-005"],
+      "cascade_chain": "ALT-001 -> ALT-002 -> ALT-003 -> ALT-004 -> ALT-005",
+      "confidence": "high",
+      "summary": "Disk space exhaustion on prod-web-03 causing cascading service degradation. The /var/log filesystem filled up (ALT-001), causing disk I/O saturation (ALT-002), which led to application latency spikes (ALT-003), log ingestion failures (ALT-004), and ultimately checkout API 500 errors (ALT-005)."
+    }
+  ],
+  "noise_alerts": []
+}

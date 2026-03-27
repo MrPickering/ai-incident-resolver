@@ -1,0 +1,41 @@
+{
+  "total_time_seconds": 28.4,
+  "total_input_tokens": 12847,
+  "total_output_tokens": 8234,
+  "total_cost_usd": 0.1620,
+  "stages": [
+    {
+      "stage": "Alert Correlation",
+      "time_seconds": 4.2,
+      "input_tokens": 1823,
+      "output_tokens": 1245,
+      "cost_usd": 0.0242
+    },
+    {
+      "stage": "Log Analysis",
+      "time_seconds": 8.7,
+      "input_tokens": 5102,
+      "output_tokens": 2891,
+      "cost_usd": 0.0587
+    },
+    {
+      "stage": "Runbook Generation",
+      "time_seconds": 7.8,
+      "input_tokens": 3156,
+      "output_tokens": 2432,
+      "cost_usd": 0.0459
+    },
+    {
+      "stage": "Incident Report",
+      "time_seconds": 7.7,
+      "input_tokens": 2766,
+      "output_tokens": 1666,
+      "cost_usd": 0.0333
+    }
+  ],
+  "comparison": {
+    "manual_time_minutes": 120,
+    "ai_time_seconds": 28.4,
+    "speedup_factor": 253.5
+  }
+}

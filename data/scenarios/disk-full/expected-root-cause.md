@@ -1,0 +1,1 @@
+Application debug logging was left enabled after a deployment on Jan 14. Verbose SQL query logging filled /var/log at ~50GB/hr. This caused cascading failures: log ingestion failed, then disk I/O saturated, then application writes failed, then checkout API started returning 500s.

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ALT-001",
+    "severity": "warning",
+    "source": "prometheus",
+    "metric": "process_resident_memory_bytes",
+    "host": "prod-app-01",
+    "value": "3670016000",
+    "threshold": "3221225472",
+    "timestamp": "2024-02-10T14:30:00Z",
+    "message": "Process memory usage at 3.4GB (threshold: 3GB)"
+  },
+  {
+    "id": "ALT-002",
+    "severity": "warning",
+    "source": "prometheus",
+    "metric": "node_memory_MemAvailable_bytes",
+    "host": "prod-app-01",
+    "value": "524288000",
+    "threshold": "1073741824",
+    "timestamp": "2024-02-10T14:35:00Z",
+    "message": "Available system memory below 1GB (500MB remaining)"
+  },
+  {
+    "id": "ALT-003",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "jvm.gc.pause_time",
+    "host": "prod-app-01",
+    "value": "8500",
+    "threshold": "2000",
+    "timestamp": "2024-02-10T14:40:00Z",
+    "message": "GC pause time 8.5s (threshold: 2s)"
+  },
+  {
+    "id": "ALT-004",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "http.response_time.p99",
+    "host": "prod-app-01",
+    "value": "15000",
+    "threshold": "2000",
+    "timestamp": "2024-02-10T14:42:00Z",
+    "message": "P99 latency spike to 15s on payment-service"
+  },
+  {
+    "id": "ALT-005",
+    "severity": "critical",
+    "source": "pagerduty",
+    "type": "service_degradation",
+    "service": "payment-service",
+    "timestamp": "2024-02-10T14:45:00Z",
+    "message": "Payment service health check failures - 60% error rate"
+  }
+]

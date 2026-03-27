@@ -1,0 +1,53 @@
+[
+  {
+    "id": "ALT-001",
+    "severity": "critical",
+    "source": "prometheus",
+    "metric": "node_filesystem_avail_bytes",
+    "host": "prod-web-03",
+    "value": "0.02",
+    "threshold": "0.10",
+    "timestamp": "2024-01-15T03:22:00Z",
+    "message": "Filesystem /var/log nearly full (2% remaining)"
+  },
+  {
+    "id": "ALT-002",
+    "severity": "warning",
+    "source": "prometheus",
+    "metric": "node_disk_io_time_seconds_total",
+    "host": "prod-web-03",
+    "value": "0.95",
+    "threshold": "0.80",
+    "timestamp": "2024-01-15T03:22:15Z",
+    "message": "Disk I/O saturation at 95%"
+  },
+  {
+    "id": "ALT-003",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "http.response_time.p99",
+    "host": "prod-web-03",
+    "value": "12500",
+    "threshold": "2000",
+    "timestamp": "2024-01-15T03:23:00Z",
+    "message": "P99 latency spike to 12.5s"
+  },
+  {
+    "id": "ALT-004",
+    "severity": "warning",
+    "source": "elasticsearch",
+    "type": "ingestion_failure",
+    "host": "prod-web-03",
+    "timestamp": "2024-01-15T03:23:30Z",
+    "message": "Log ingestion failing - write rejected"
+  },
+  {
+    "id": "ALT-005",
+    "severity": "critical",
+    "source": "pagerduty",
+    "type": "service_degradation",
+    "service": "checkout-api",
+    "timestamp": "2024-01-15T03:24:00Z",
+    "message": "Checkout API returning 500 errors"
+  }
+]

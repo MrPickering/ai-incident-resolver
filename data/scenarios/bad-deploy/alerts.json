@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ALT-001",
+    "severity": "critical",
+    "source": "datadog",
+    "metric": "http.5xx_rate",
+    "host": "prod-app-01",
+    "value": "0.45",
+    "threshold": "0.05",
+    "timestamp": "2024-05-08T16:32:00Z",
+    "message": "HTTP 500 error rate at 45% on prod-app-01"
+  },
+  {
+    "id": "ALT-002",
+    "severity": "warning",
+    "source": "datadog",
+    "metric": "http.5xx_rate",
+    "host": "prod-app-02",
+    "value": "0.02",
+    "threshold": "0.05",
+    "timestamp": "2024-05-08T16:32:30Z",
+    "message": "HTTP 500 error rate normal on prod-app-02 (2%)"
+  },
+  {
+    "id": "ALT-003",
+    "severity": "critical",
+    "source": "prometheus",
+    "metric": "application_startup_errors_total",
+    "host": "prod-app-01",
+    "value": "147",
+    "threshold": "0",
+    "timestamp": "2024-05-08T16:33:00Z",
+    "message": "147 application startup errors on prod-app-01"
+  },
+  {
+    "id": "ALT-004",
+    "severity": "warning",
+    "source": "prometheus",
+    "metric": "database_connection_errors_total",
+    "host": "prod-app-01",
+    "value": "89",
+    "threshold": "5",
+    "timestamp": "2024-05-08T16:34:00Z",
+    "message": "89 database connection errors on prod-app-01"
+  },
+  {
+    "id": "ALT-005",
+    "severity": "critical",
+    "source": "pagerduty",
+    "type": "service_degradation",
+    "service": "search-api",
+    "timestamp": "2024-05-08T16:35:00Z",
+    "message": "Search API partial outage - 45% of requests failing"
+  }
+]

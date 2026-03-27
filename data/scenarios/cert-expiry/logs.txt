@@ -1,0 +1,41 @@
+Apr 13 09:00:00 prod-lb-01 certbot[3101]: INFO Certificate renewal check started
+Apr 13 09:00:01 prod-lb-01 certbot[3101]: INFO Certificate *.example.com expires in 7 days (2024-04-20)
+Apr 13 09:00:02 prod-lb-01 certbot[3101]: INFO Attempting automatic renewal via DNS-01 challenge
+Apr 13 09:00:10 prod-lb-01 certbot[3101]: ERROR Failed to create DNS TXT record: API token expired
+Apr 13 09:00:10 prod-lb-01 certbot[3101]: ERROR CloudFlare API error 9103: Unknown X-Auth-Key or X-Auth-Email
+Apr 13 09:00:11 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - will retry in 12 hours
+Apr 13 09:00:12 prod-lb-01 certbot[3101]: WARNING Next retry at 2024-04-13T21:00:00Z
+Apr 13 21:00:00 prod-lb-01 certbot[3101]: INFO Certificate renewal retry started
+Apr 13 21:00:08 prod-lb-01 certbot[3101]: ERROR Failed to create DNS TXT record: API token expired
+Apr 13 21:00:09 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - will retry in 12 hours
+Apr 14 09:00:00 prod-lb-01 certbot[3101]: INFO Certificate renewal retry started
+Apr 14 09:00:08 prod-lb-01 certbot[3101]: ERROR Failed to create DNS TXT record: API token expired
+Apr 14 09:00:09 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - 6 days until expiry
+Apr 14 09:00:10 prod-lb-01 certbot[3101]: WARNING Renewal has failed 3 times consecutively
+Apr 15 09:00:00 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - 5 days until expiry
+Apr 16 09:00:00 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - 4 days until expiry
+Apr 17 09:00:00 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - 3 days until expiry
+Apr 17 09:00:01 prod-lb-01 certbot[3101]: CRITICAL Certificate expires in 3 days - manual intervention required
+Apr 18 09:00:00 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - 2 days until expiry
+Apr 19 09:00:00 prod-lb-01 certbot[3101]: ERROR Renewal failed for *.example.com - 1 day until expiry
+Apr 19 09:00:01 prod-lb-01 certbot[3101]: CRITICAL Certificate expires TOMORROW - immediate action required
+Apr 20 00:00:00 prod-lb-01 nginx[2201]: WARNING TLS certificate for *.example.com has expired
+Apr 20 00:00:01 prod-lb-01 nginx[2201]: ERROR SSL_do_handshake() failed: certificate has expired
+Apr 20 00:00:01 prod-lb-01 nginx[2201]: ERROR client 203.0.113.45: SSL handshake failed (err: certificate has expired)
+Apr 20 00:00:02 prod-lb-01 nginx[2201]: ERROR client 198.51.100.22: SSL handshake failed (err: certificate has expired)
+Apr 20 00:00:05 prod-lb-01 nginx[2201]: ERROR 15 TLS handshake failures in last 5 seconds
+Apr 20 00:00:10 prod-lb-01 nginx[2201]: ERROR 42 TLS handshake failures in last 10 seconds
+Apr 20 00:00:15 prod-lb-01 nginx[2201]: WARNING Clients with HSTS enabled cannot bypass certificate error
+Apr 20 00:00:30 prod-lb-01 prometheus-exporter[2301]: ALERT: ssl_certificate_expiry_seconds = 0 for *.example.com
+Apr 20 00:01:00 prod-lb-01 datadog-agent[1801]: ALERT: ssl_handshake_error_rate = 0.98 (threshold: 0.01)
+Apr 20 00:01:15 prod-lb-01 nginx[2201]: ERROR 580 TLS handshake failures in last 60 seconds
+Apr 20 00:01:30 prod-lb-01 nginx[2201]: INFO HTTP (non-TLS) requests on port 80 still succeeding
+Apr 20 00:01:31 prod-lb-01 nginx[2201]: WARNING But HSTS header forces most browsers to HTTPS
+Apr 20 00:02:00 prod-lb-01 datadog-agent[1801]: ALERT: http.5xx_rate = 0.95 for prod-lb-01
+Apr 20 00:02:30 prod-lb-01 nginx[2201]: ERROR upstream connections dropping - backend health checks failing over TLS
+Apr 20 00:03:00 prod-lb-01 statuspage-agent[1701]: WARNING 45 customer reports received in last 3 minutes
+Apr 20 00:03:01 prod-lb-01 statuspage-agent[1701]: WARNING Common report: "Your connection is not private" / NET::ERR_CERT_DATE_INVALID
+Apr 20 00:04:00 prod-lb-01 nginx[2201]: CRITICAL 2,400 failed HTTPS requests in last 4 minutes
+Apr 20 00:04:30 prod-lb-01 nginx[2201]: ERROR API clients receiving: curl: (60) SSL certificate problem: certificate has expired
+Apr 20 00:05:00 prod-lb-01 pagerduty-agent[1901]: INCIDENT CREATED: Complete web portal outage - all HTTPS traffic failing
+Apr 20 00:05:01 prod-lb-01 nginx[2201]: CRITICAL Zero successful HTTPS connections in last 60 seconds

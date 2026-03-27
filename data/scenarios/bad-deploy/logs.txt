@@ -1,0 +1,47 @@
+May 08 16:25:00 prod-app-01 deploy-agent[4521]: INFO Rolling deployment started: search-api v4.2.0
+May 08 16:25:01 prod-app-01 deploy-agent[4521]: INFO Deploying to canary host: prod-app-01
+May 08 16:25:02 prod-app-01 deploy-agent[4521]: INFO Pulling image: registry.internal/search-api:v4.2.0
+May 08 16:25:10 prod-app-01 deploy-agent[4521]: INFO Image pulled successfully
+May 08 16:25:11 prod-app-01 deploy-agent[4521]: INFO Stopping search-api v4.1.5
+May 08 16:25:12 prod-app-01 deploy-agent[4521]: INFO Starting search-api v4.2.0
+May 08 16:25:15 prod-app-01 search-api[6101]: INFO Starting search-api v4.2.0
+May 08 16:25:16 prod-app-01 search-api[6101]: INFO Loading configuration from /etc/search-api/config.yaml
+May 08 16:25:16 prod-app-01 search-api[6101]: INFO Database configuration: host=db-primary.internal, port=5432, dbname=search_db
+May 08 16:25:17 prod-app-01 search-api[6101]: INFO Connecting to database...
+May 08 16:25:17 prod-app-01 search-api[6101]: ERROR Failed to connect to database: password authentication failed for user "search_api"
+May 08 16:25:17 prod-app-01 search-api[6101]: ERROR FATAL: password authentication failed for user "search_api" (pg_hba.conf)
+May 08 16:25:18 prod-app-01 search-api[6101]: WARNING Retrying database connection (attempt 2/5)
+May 08 16:25:20 prod-app-01 search-api[6101]: ERROR Failed to connect to database: password authentication failed for user "search_api"
+May 08 16:25:22 prod-app-01 search-api[6101]: WARNING Retrying database connection (attempt 3/5)
+May 08 16:25:24 prod-app-01 search-api[6101]: ERROR Failed to connect to database: password authentication failed for user "search_api"
+May 08 16:25:26 prod-app-01 search-api[6101]: WARNING Retrying database connection (attempt 4/5)
+May 08 16:25:28 prod-app-01 search-api[6101]: ERROR Failed to connect to database: password authentication failed for user "search_api"
+May 08 16:25:30 prod-app-01 search-api[6101]: WARNING Retrying database connection (attempt 5/5)
+May 08 16:25:32 prod-app-01 search-api[6101]: ERROR Failed to connect to database: password authentication failed for user "search_api"
+May 08 16:25:32 prod-app-01 search-api[6101]: CRITICAL Database connection failed after 5 retries
+May 08 16:25:33 prod-app-01 search-api[6101]: WARNING Starting in degraded mode - search index queries will fail
+May 08 16:25:33 prod-app-01 search-api[6101]: INFO HTTP server listening on port 8080 (degraded mode)
+May 08 16:25:35 prod-app-01 search-api[6101]: INFO Health check endpoint /health returning 200 (degraded)
+May 08 16:26:00 prod-app-01 deploy-agent[4521]: INFO Health check passed for prod-app-01 (HTTP 200)
+May 08 16:26:01 prod-app-01 deploy-agent[4521]: WARNING Note: deployment continuing despite degraded health
+May 08 16:27:00 prod-app-01 nginx[2201]: INFO Load balancer routing 50% traffic to prod-app-01 (v4.2.0)
+May 08 16:27:01 prod-app-01 nginx[2201]: INFO Load balancer routing 50% traffic to prod-app-02 (v4.1.5)
+May 08 16:28:00 prod-app-01 search-api[6101]: ERROR Request GET /api/search?q=laptop failed: database connection not available
+May 08 16:28:00 prod-app-01 search-api[6101]: ERROR Returning 500: {"error": "search service unavailable", "reason": "database_connection_failed"}
+May 08 16:28:05 prod-app-01 search-api[6101]: ERROR Request GET /api/search?q=phone failed: database connection not available
+May 08 16:28:10 prod-app-01 search-api[6101]: ERROR Request POST /api/search/index failed: database connection not available
+May 08 16:28:15 prod-app-02 search-api[5201]: INFO Request GET /api/search?q=laptop completed in 45ms (v4.1.5 - healthy)
+May 08 16:28:20 prod-app-01 search-api[6101]: ERROR Request GET /api/search?q=headphones failed: database connection not available
+May 08 16:29:00 prod-app-01 search-api[6101]: ERROR 47 requests failed in last 60 seconds (all database-dependent)
+May 08 16:29:01 prod-app-01 search-api[6101]: INFO 12 requests succeeded in last 60 seconds (static endpoints only)
+May 08 16:30:00 prod-app-01 search-api[6101]: ERROR Database reconnection attempt failed: password authentication failed
+May 08 16:30:01 prod-app-01 search-api[6101]: ERROR Config shows DB_PASSWORD last rotated: 2024-05-08T16:00:00Z
+May 08 16:30:02 prod-app-01 search-api[6101]: ERROR Config shows DB_PASSWORD source: vault/search-api/v4.2.0/db-creds
+May 08 16:30:03 prod-app-02 search-api[5201]: INFO Database connection healthy (v4.1.5 using vault/search-api/v4.1.5/db-creds)
+May 08 16:31:00 prod-app-01 search-api[6101]: ERROR 92 failed requests in last 2 minutes
+May 08 16:32:00 prod-app-01 datadog-agent[1801]: ALERT: http.5xx_rate = 0.45 on prod-app-01 (threshold: 0.05)
+May 08 16:32:30 prod-app-02 datadog-agent[1802]: INFO http.5xx_rate = 0.02 on prod-app-02 (normal)
+May 08 16:33:00 prod-app-01 prometheus-exporter[2301]: ALERT: application_startup_errors_total = 147 on prod-app-01
+May 08 16:34:00 prod-app-01 prometheus-exporter[2301]: ALERT: database_connection_errors_total = 89 on prod-app-01
+May 08 16:35:00 prod-app-01 pagerduty-agent[1901]: INCIDENT CREATED: Search API partial outage - 45% of requests failing
+May 08 16:35:30 prod-app-01 search-api[6101]: CRITICAL Sustained 45% error rate for 7 minutes

@@ -1,0 +1,44 @@
+Mar 05 10:00:00 prod-dns-01 named[2101]: INFO zone transfer completed for internal.example.com
+Mar 05 10:00:01 prod-dns-02 named[2201]: INFO zone transfer completed for internal.example.com
+Mar 05 10:05:00 prod-dns-01 named[2101]: INFO applying configuration update from config-manager
+Mar 05 10:05:01 prod-dns-01 named[2101]: INFO loading new forwarders configuration
+Mar 05 10:05:02 prod-dns-01 named[2101]: INFO forwarders updated: 10.0.0.53 -> 10.0.99.53 (via automated config push)
+Mar 05 10:05:03 prod-dns-02 named[2201]: INFO applying configuration update from config-manager
+Mar 05 10:05:04 prod-dns-02 named[2201]: INFO forwarders updated: 10.0.0.54 -> 10.0.99.54 (via automated config push)
+Mar 05 10:05:05 prod-dns-01 named[2101]: INFO configuration reload complete
+Mar 05 10:05:06 prod-dns-02 named[2201]: INFO configuration reload complete
+Mar 05 10:06:00 prod-dns-01 named[2101]: INFO query for api.stripe.com from 10.1.2.15 - forwarding to 10.0.99.53
+Mar 05 10:06:05 prod-dns-01 named[2101]: WARNING query timeout: api.stripe.com - forwarder 10.0.99.53 not responding
+Mar 05 10:06:10 prod-dns-01 named[2101]: WARNING retry 1/3: api.stripe.com - forwarder 10.0.99.53
+Mar 05 10:06:15 prod-dns-01 named[2101]: WARNING retry 2/3: api.stripe.com - forwarder 10.0.99.53
+Mar 05 10:06:20 prod-dns-01 named[2101]: WARNING retry 3/3: api.stripe.com - forwarder 10.0.99.53
+Mar 05 10:06:20 prod-dns-01 named[2101]: ERROR SERVFAIL for api.stripe.com IN A: all forwarders unreachable
+Mar 05 10:06:21 prod-dns-02 named[2201]: ERROR SERVFAIL for api.github.com IN A: all forwarders unreachable
+Mar 05 10:07:00 prod-app-01 user-service[5101]: ERROR DNS resolution failed for api.stripe.com: SERVFAIL
+Mar 05 10:07:01 prod-app-01 user-service[5101]: ERROR Payment verification failed: could not connect to Stripe API
+Mar 05 10:07:05 prod-app-02 order-service[5201]: ERROR DNS resolution failed for sqs.us-east-1.amazonaws.com: SERVFAIL
+Mar 05 10:07:06 prod-app-02 order-service[5201]: ERROR Failed to publish message to SQS queue
+Mar 05 10:08:00 prod-dns-01 named[2101]: ERROR 142 SERVFAIL responses in last 60 seconds
+Mar 05 10:08:01 prod-dns-02 named[2201]: ERROR 138 SERVFAIL responses in last 60 seconds
+Mar 05 10:08:05 prod-dns-01 named[2101]: INFO internal zone queries succeeding (cached): db.internal.example.com OK
+Mar 05 10:08:06 prod-dns-01 named[2101]: ERROR external queries failing: forwarder 10.0.99.53 connection refused
+Mar 05 10:09:00 prod-app-01 user-service[5101]: ERROR Circuit breaker OPEN for stripe-api (failures: 25/25)
+Mar 05 10:09:01 prod-app-02 order-service[5201]: ERROR Circuit breaker OPEN for aws-sqs (failures: 30/30)
+Mar 05 10:09:30 prod-app-03 notification-service[5301]: ERROR DNS resolution failed for smtp.sendgrid.net: SERVFAIL
+Mar 05 10:09:31 prod-app-03 notification-service[5301]: ERROR Email delivery failed: cannot resolve SMTP server
+Mar 05 10:10:00 prod-app-01 user-service[5101]: ERROR 89% of external API calls failing in last 5 minutes
+Mar 05 10:10:01 prod-app-02 order-service[5201]: ERROR Message queue backlog: 2,450 messages pending
+Mar 05 10:12:00 prod-dns-01 named[2101]: WARNING query cache hit rate dropped: 95% -> 12%
+Mar 05 10:12:01 prod-dns-01 named[2101]: INFO cached entries expiring, cannot refresh from forwarders
+Mar 05 10:13:00 prod-app-01 nginx[2201]: ERROR upstream timed out while connecting: user-service
+Mar 05 10:13:01 prod-app-01 nginx[2201]: ERROR 502 Bad Gateway: 85 responses in last 60 seconds
+Mar 05 10:14:00 prod-dns-01 named[2101]: ERROR forwarder health check failed: 10.0.99.53 - connection refused
+Mar 05 10:14:01 prod-dns-01 named[2101]: ERROR no valid forwarders available - cannot resolve external queries
+Mar 05 10:14:02 prod-dns-02 named[2201]: ERROR forwarder health check failed: 10.0.99.54 - connection refused
+Mar 05 10:15:00 prod-dns-01 prometheus-exporter[2301]: ALERT: dns_query_failure_rate = 0.85 (threshold: 0.05)
+Mar 05 10:15:30 prod-dns-02 prometheus-exporter[2401]: ALERT: dns_query_failure_rate = 0.82 (threshold: 0.05)
+Mar 05 10:16:00 prod-app-01 datadog-agent[1801]: ALERT: http.connect_time.p99 = 30000ms across prod-app-*
+Mar 05 10:17:00 prod-app-01 datadog-agent[1801]: ALERT: external_api.error_rate = 0.95 for user-service
+Mar 05 10:18:00 prod-app-01 pagerduty-agent[1901]: INCIDENT CREATED: Multiple services degraded
+Mar 05 10:18:30 prod-dns-01 named[2101]: CRITICAL 98% of external DNS queries failing
+Mar 05 10:19:00 prod-app-01 user-service[5101]: CRITICAL Service non-functional - all external dependencies unreachable

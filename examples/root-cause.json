@@ -1,0 +1,29 @@
+{
+  "root_cause": "Application debug logging (LOG_LEVEL=DEBUG, SQL_QUERY_LOGGING=true) was left enabled after deployment of checkout-api v2.14.3 on Jan 14. Verbose SQL query logging generated ~50GB/hr, filling the 500GB /var/log partition in approximately 9 hours.",
+  "timeline": [
+    {"time": "2024-01-14T18:00:12Z", "event": "Deployment of checkout-api v2.14.3 with LOG_LEVEL=DEBUG and SQL_QUERY_LOGGING=true"},
+    {"time": "2024-01-14T19:00:00Z", "event": "Disk usage at 42% - normal growth rate not yet alarming"},
+    {"time": "2024-01-15T00:00:00Z", "event": "Disk usage reached 90% - warning threshold hit"},
+    {"time": "2024-01-15T00:05:01Z", "event": "Log rotation failed - checkout-api.log too large (48GB)"},
+    {"time": "2024-01-15T03:10:15Z", "event": "First write failure: 'No space left on device'"},
+    {"time": "2024-01-15T03:15:00Z", "event": "Nginx error log writes failing, buffering in memory"},
+    {"time": "2024-01-15T03:18:01Z", "event": "Checkout API returning 500 errors - cannot create temp files"},
+    {"time": "2024-01-15T03:22:00Z", "event": "Prometheus alert: filesystem 2% remaining"},
+    {"time": "2024-01-15T03:24:00Z", "event": "PagerDuty incident created: checkout API 500 errors"},
+    {"time": "2024-01-15T03:25:30Z", "event": "OOM kill of checkout-api process, restart fails due to no disk space"}
+  ],
+  "evidence": [
+    "Deploy log shows LOG_LEVEL=DEBUG and SQL_QUERY_LOGGING=true enabled at 18:00:15",
+    "Disk usage grew linearly: 42% (19:00) -> 52% (20:00) -> 62% (21:00) -> 90% (00:00) - consistent ~50GB/hr",
+    "Log rotation failed at 00:05 because checkout-api.log was 48GB (exceeds maxsize)",
+    "First 'No space left on device' error at 03:10:15",
+    "Checkout API restart failed at 03:25:35 - cannot write PID file"
+  ],
+  "confidence": "high",
+  "contributing_factors": [
+    "No log rotation size limit configured for the debug log file",
+    "Disk usage alerting only triggered at 90% - no earlier warning thresholds",
+    "Deployment pipeline has no validation for production log levels",
+    "Health checks did not verify disk space as a dependency"
+  ]
+}

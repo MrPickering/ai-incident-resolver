@@ -1,0 +1,73 @@
+Jan 14 18:00:12 prod-web-03 deploy-agent[4521]: INFO Deployment started: checkout-api v2.14.3
+Jan 14 18:00:15 prod-web-03 deploy-agent[4521]: INFO Configuration applied: LOG_LEVEL=DEBUG
+Jan 14 18:00:15 prod-web-03 deploy-agent[4521]: INFO Configuration applied: SQL_QUERY_LOGGING=true
+Jan 14 18:00:18 prod-web-03 deploy-agent[4521]: INFO Deployment completed successfully
+Jan 14 18:00:19 prod-web-03 checkout-api[5102]: DEBUG Starting request handler pool (workers=16)
+Jan 14 18:00:19 prod-web-03 checkout-api[5102]: DEBUG Database connection pool initialized (min=5, max=20)
+Jan 14 18:00:20 prod-web-03 checkout-api[5102]: INFO Service checkout-api v2.14.3 started on port 8080
+Jan 14 18:01:05 prod-web-03 checkout-api[5102]: DEBUG SQL: SELECT * FROM products WHERE id = 4521 (took 2ms)
+Jan 14 18:01:05 prod-web-03 checkout-api[5102]: DEBUG SQL: SELECT * FROM inventory WHERE product_id = 4521 (took 3ms)
+Jan 14 18:01:06 prod-web-03 checkout-api[5102]: DEBUG Request GET /api/products/4521 completed in 12ms
+Jan 14 18:01:12 prod-web-03 checkout-api[5102]: DEBUG SQL: SELECT * FROM users WHERE session_token = 'abc123' (took 1ms)
+Jan 14 18:01:12 prod-web-03 checkout-api[5102]: DEBUG SQL: SELECT * FROM cart_items WHERE user_id = 891 (took 4ms)
+Jan 14 18:01:13 prod-web-03 checkout-api[5102]: DEBUG Request GET /api/cart completed in 15ms
+Jan 14 18:05:00 prod-web-03 systemd[1]: INFO logrotate.service: Starting log rotation
+Jan 14 18:05:01 prod-web-03 logrotate[6201]: INFO Rotating /var/log/checkout-api.log
+Jan 14 18:05:01 prod-web-03 logrotate[6201]: INFO Rotation complete: /var/log/checkout-api.log.1 (45MB)
+Jan 14 19:00:00 prod-web-03 node_exporter[1102]: INFO disk usage /var/log: 42% (210GB/500GB)
+Jan 14 20:00:00 prod-web-03 node_exporter[1102]: INFO disk usage /var/log: 52% (260GB/500GB)
+Jan 14 20:00:01 prod-web-03 checkout-api[5102]: DEBUG SQL: BEGIN TRANSACTION (took 1ms)
+Jan 14 20:00:01 prod-web-03 checkout-api[5102]: DEBUG SQL: INSERT INTO orders (user_id, total) VALUES (891, 149.99) (took 5ms)
+Jan 14 20:00:02 prod-web-03 checkout-api[5102]: DEBUG SQL: INSERT INTO order_items (order_id, product_id, qty) VALUES (10241, 4521, 2) (took 3ms)
+Jan 14 20:00:02 prod-web-03 checkout-api[5102]: DEBUG SQL: COMMIT (took 2ms)
+Jan 14 20:00:02 prod-web-03 checkout-api[5102]: DEBUG Request POST /api/checkout completed in 45ms
+Jan 14 21:00:00 prod-web-03 node_exporter[1102]: INFO disk usage /var/log: 62% (310GB/500GB)
+Jan 14 22:00:00 prod-web-03 node_exporter[1102]: INFO disk usage /var/log: 72% (360GB/500GB)
+Jan 14 23:00:00 prod-web-03 node_exporter[1102]: INFO disk usage /var/log: 82% (410GB/500GB)
+Jan 15 00:00:00 prod-web-03 node_exporter[1102]: WARNING disk usage /var/log: 90% (450GB/500GB)
+Jan 15 00:05:00 prod-web-03 systemd[1]: INFO logrotate.service: Starting log rotation
+Jan 15 00:05:01 prod-web-03 logrotate[7802]: ERROR Failed to rotate /var/log/checkout-api.log: file too large (48GB)
+Jan 15 00:05:01 prod-web-03 logrotate[7802]: ERROR Skipping rotation for checkout-api - maxsize exceeded
+Jan 15 01:00:00 prod-web-03 node_exporter[1102]: WARNING disk usage /var/log: 93% (465GB/500GB)
+Jan 15 01:30:22 prod-web-03 checkout-api[5102]: DEBUG SQL: SELECT c.*, p.name, p.price FROM cart_items c JOIN products p ON c.product_id = p.id WHERE c.user_id = 2041 (took 8ms)
+Jan 15 01:30:22 prod-web-03 checkout-api[5102]: DEBUG Request GET /api/cart completed in 22ms
+Jan 15 02:00:00 prod-web-03 node_exporter[1102]: CRITICAL disk usage /var/log: 96% (480GB/500GB)
+Jan 15 02:15:33 prod-web-03 checkout-api[5102]: WARNING Slow write to log file: 450ms (expected <10ms)
+Jan 15 02:30:00 prod-web-03 checkout-api[5102]: WARNING Slow write to log file: 1200ms (expected <10ms)
+Jan 15 02:45:00 prod-web-03 checkout-api[5102]: WARNING Slow write to log file: 2500ms (expected <10ms)
+Jan 15 03:00:00 prod-web-03 node_exporter[1102]: CRITICAL disk usage /var/log: 98% (490GB/500GB)
+Jan 15 03:10:15 prod-web-03 checkout-api[5102]: ERROR Failed to write to /var/log/checkout-api.log: No space left on device
+Jan 15 03:10:15 prod-web-03 checkout-api[5102]: ERROR Log write failure, switching to stderr
+Jan 15 03:12:00 prod-web-03 kernel: [452981.234] EXT4-fs warning (device sda1): ext4_dx_add_entry:2085: Directory (ino: 131073) index full, reach max htree level :2
+Jan 15 03:15:00 prod-web-03 nginx[2201]: ERROR [emerg] could not open error log file: open() "/var/log/nginx/error.log" failed (28: No space left on device)
+Jan 15 03:15:01 prod-web-03 nginx[2201]: WARNING Buffering responses in memory - disk write failed
+Jan 15 03:18:00 prod-web-03 checkout-api[5102]: ERROR Unable to create temp file for request processing: No space left on device
+Jan 15 03:18:01 prod-web-03 checkout-api[5102]: ERROR Request POST /api/checkout failed: 500 Internal Server Error
+Jan 15 03:18:05 prod-web-03 checkout-api[5102]: ERROR Request POST /api/checkout failed: 500 Internal Server Error
+Jan 15 03:18:10 prod-web-03 checkout-api[5102]: ERROR Request POST /api/checkout failed: 500 Internal Server Error
+Jan 15 03:19:00 prod-web-03 elasticsearch[3301]: ERROR [o.e.a.b.TransportShardBulkAction] failed to execute bulk item (index) index {[logs-2024.01.15][0]}
+Jan 15 03:19:00 prod-web-03 elasticsearch[3301]: ERROR org.elasticsearch.common.util.concurrent.EsRejectedExecutionException: rejected execution of coordinating operation
+Jan 15 03:19:01 prod-web-03 elasticsearch[3301]: WARNING Ingestion queue full - rejecting new documents
+Jan 15 03:20:00 prod-web-03 node_exporter[1102]: CRITICAL disk I/O wait time: 95% (threshold: 80%)
+Jan 15 03:20:01 prod-web-03 node_exporter[1102]: WARNING disk write latency: 850ms avg (threshold: 50ms)
+Jan 15 03:21:00 prod-web-03 checkout-api[5102]: ERROR Connection pool exhausted - all 20 connections busy (avg query time: 2500ms)
+Jan 15 03:21:01 prod-web-03 checkout-api[5102]: ERROR Request timeout: GET /api/products/8821 (30000ms)
+Jan 15 03:22:00 prod-web-03 prometheus[1501]: ALERT FIRING: node_filesystem_avail_bytes < 0.10 on prod-web-03 (current: 0.02)
+Jan 15 03:22:15 prod-web-03 prometheus[1501]: ALERT FIRING: node_disk_io_time_seconds_total > 0.80 on prod-web-03 (current: 0.95)
+Jan 15 03:22:30 prod-web-03 checkout-api[5102]: ERROR Health check failed: disk space critical
+Jan 15 03:23:00 prod-web-03 datadog-agent[1801]: ALERT: http.response_time.p99 = 12500ms (threshold: 2000ms) on prod-web-03
+Jan 15 03:23:15 prod-web-03 checkout-api[5102]: ERROR 47 requests failed in last 60 seconds
+Jan 15 03:23:30 prod-web-03 elasticsearch[3301]: ERROR Bulk indexing failed: all shards failed for [logs-2024.01.15]
+Jan 15 03:23:31 prod-web-03 elasticsearch[3301]: ERROR Log ingestion pipeline halted - write rejected
+Jan 15 03:24:00 prod-web-03 pagerduty-agent[1901]: INCIDENT CREATED: Checkout API returning 500 errors (severity: critical)
+Jan 15 03:24:01 prod-web-03 checkout-api[5102]: CRITICAL Service degradation: 85% error rate in last 5 minutes
+Jan 15 03:24:30 prod-web-03 nginx[2201]: ERROR upstream timed out (110: Connection timed out) while reading response header from upstream
+Jan 15 03:24:31 prod-web-03 nginx[2201]: ERROR 502 Bad Gateway responses: 120 in last 60 seconds
+Jan 15 03:25:00 prod-web-03 checkout-api[5102]: CRITICAL All checkout requests failing - service non-functional
+Jan 15 03:25:01 prod-web-03 systemd[1]: WARNING checkout-api.service: memory usage 3.8GB (limit: 4GB)
+Jan 15 03:25:30 prod-web-03 kernel: [453801.891] oom_kill_process: checkout-api[5102] score 850
+Jan 15 03:25:30 prod-web-03 systemd[1]: ERROR checkout-api.service: Main process exited, code=killed, status=9/KILL
+Jan 15 03:25:31 prod-web-03 systemd[1]: INFO checkout-api.service: Scheduled restart job
+Jan 15 03:25:35 prod-web-03 checkout-api[8901]: ERROR Failed to start: cannot write PID file to /var/run/checkout-api.pid: No space left on device
+Jan 15 03:25:35 prod-web-03 systemd[1]: ERROR checkout-api.service: Start request repeated too quickly
+Jan 15 03:25:36 prod-web-03 systemd[1]: ERROR checkout-api.service: Failed with result 'start-limit-hit'
